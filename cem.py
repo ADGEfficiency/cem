@@ -4,6 +4,7 @@ import heapq
 from multiprocessing import Pool
 from functools import partial
 import os
+import time
 
 import gym
 import numpy as np
@@ -14,12 +15,6 @@ from plotting import plot_history
 
 
 def ensure_dir(file_path):
-    """
-    Checks a directory exists.  If it doesn't - makes it.
-
-    args
-        file_path (str)
-    """
     directory = os.path.dirname(file_path)
 
     if not os.path.exists(directory):
@@ -34,13 +29,12 @@ def evaluate_theta(theta, env_id, monitor=False):
     env, _, _ = setup_env(env_id)
 
     if monitor:
-        env = gym.wrappers.Monitor(env, env_id, force=True)
+        env = gym.wrappers.Monitor(env, env_id, force=False)
 
     policy = setup_policy(env, theta)
 
     done = False
     observation = env.reset()
-    # env.env.monitor.start('/tmp/cartpole-experiment-1')
     rewards = []
 
     while not done:
@@ -66,8 +60,7 @@ def run_cem(
 
         num_process=4
 ):
-
-    ensure_dir('./{}'.format(env_id))
+    ensure_dir('./{}/'.format(env_id))
 
     start = time.time()
     num_episodes = epochs * num_process * batch_size
@@ -121,7 +114,7 @@ def run_cem(
     expt_time = end - start
     print('expt took {:2.1f} seconds'.format(expt_time))
     plot_history(history, env_id, num_episodes, expt_time)
-    num_optimal = 1
+    num_optimal = 3
     print('epochs done - evaluating {} best thetas'.format(num_optimal))
 
     #  relying on monitor to make the env_id folder :)
@@ -140,6 +133,5 @@ if __name__ == '__main__':
 
     print(args)
 
-    import time
 
     run_cem(args.env, num_process=args.num_process, epochs=args.epochs, batch_size=args.batch_size)
