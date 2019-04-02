@@ -1,0 +1,6 @@
+.DS_Store
+.python-version
+*.swp
+__pycache__
+
+*egg*
