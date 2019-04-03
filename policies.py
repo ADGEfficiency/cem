@@ -51,8 +51,4 @@ class DiscretePolicy():
     def act(self, observation):
         y = observation.dot(self.W) + self.b
         action = np.argmax(y)
-
-        #  cartpole requires a single number, not an array as the action
         return action
-
-        # return np.array(action).reshape(1, env.action_space.shape[0])

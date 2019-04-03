@@ -119,7 +119,6 @@ def run_cem(
     num_optimal = 3
     print('epochs done - evaluating {} best thetas'.format(num_optimal))
 
-    #  relying on monitor to make the env_id folder :)
     best_theta_rewards = [evaluate_theta(theta, env_id, monitor=True)
                           for theta in elites[:num_optimal]]
     print('best rewards - {} acoss {} samples'.format(best_theta_rewards, num_optimal))
@@ -128,12 +127,10 @@ def run_cem(
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('env')
-    parser.add_argument('--num_process', default=6, nargs='?', type=int)
-    parser.add_argument('--epochs', default=15, nargs='?', type=int)
+    parser.add_argument('--num_process', default=2, nargs='?', type=int)
+    parser.add_argument('--epochs', default=5, nargs='?', type=int)
     parser.add_argument('--batch_size', default=4096, nargs='?', type=int)
     args = parser.parse_args()
-
     print(args)
-
 
     run_cem(args.env, num_process=args.num_process, epochs=args.epochs, batch_size=args.batch_size)
