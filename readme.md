@@ -4,13 +4,10 @@ CEM is a optimization algorithm that fits parameters using
 
 ```python
 for epoch in num_epochs:
-	sampling a population from a distribution
-
-	testing that population using the environment
-
-	selecting the elites (judged by total episode reward)
-
-	refitting the sampling distribution (to the elites)
+  sampling a population from a distribution
+  testing that population using the environment
+  selecting the elites (judged by total episode reward)
+  refitting the sampling distribution (to the elites)
 ```
 
 The total number of episodes run in an experiment is given by:
