@@ -2,5 +2,7 @@
 .python-version
 *.swp
 __pycache__
-
 *egg*
+
+cartpole
+pendulum

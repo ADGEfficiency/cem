@@ -110,9 +110,11 @@ def run_cem(
                 history['std_elites'][-1]
             )
         )
+
     end = time.time()
     expt_time = end - start
     print('expt took {:2.1f} seconds'.format(expt_time))
+
     plot_history(history, env_id, num_episodes, expt_time)
     num_optimal = 3
     print('epochs done - evaluating {} best thetas'.format(num_optimal))
