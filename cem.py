@@ -29,7 +29,7 @@ def evaluate_theta(theta, env_id, monitor=False):
     env, _, _ = setup_env(env_id)
 
     if monitor:
-        env = gym.wrappers.Monitor(env, env_id, force=False)
+        env = gym.wrappers.Monitor(env, env_id, force=True)
 
     policy = setup_policy(env, theta)
 
@@ -58,7 +58,7 @@ def run_cem(
         extra_std=2.0,
         extra_decay_time=10,
 
-        num_process=4
+        num_process=8
 ):
     ensure_dir('./{}/'.format(env_id))
 
